@@ -24,18 +24,42 @@ class Wagon {
     this.passageiros = [];
   }
 
-  getAvaliableSeatCount() {
-    return this.passageiros.length - this.capacity;
+  getAvailableSeatCount() {
+    return this.capacity - this.passageiros.length ;
   }
 
-  join(name) {
-    if (this.getAvaliableSeatCount() > 0) {
-      this.passageiros += name;
+  join(passageiro) {
+    if (this.getAvailableSeatCount() > 0) {
+      this.passageiros.push(passageiro);
     }
   }
 
-  shouldQuarantine() {}
+  shouldQuarantine() {
+    let result
+    this.passageiros.forEach(element => {
+      if( element.isHealthy === false){
+        result = `true since ${element.name} is sick`
+      }else{
+        result = "nobody is sick"
+      }
+
+    });
+    return result
+  }
+
+  totalFood(){
+    let sum = 0
+    this.passageiros.forEach(element => {
+      sum += element.food
+    })
+    return sum
+  }
 }
+
+
+
+
+
 let wagon = new Wagon(2);
 // Criar três viajantes
 let henrietta = new Traveler("Henrietta");
@@ -57,3 +81,4 @@ juan.eat(); // juan agora está com fome (doente)
 
 console.log(`${wagon.shouldQuarantine()} should be true since juan is sick`);
 console.log(`${wagon.totalFood()} should be 3`);
+
