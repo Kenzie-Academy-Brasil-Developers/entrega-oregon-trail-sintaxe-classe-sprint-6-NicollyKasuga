@@ -2,7 +2,7 @@ class Traveler {
   constructor(name) {
     this.name = name;
     this.food = 1;
-    this.isHealthy = true;
+    this.isHealthy = false;
   }
 
   hunt() {
@@ -24,14 +24,18 @@ class Wagon {
     this.passageiros = [];
   }
 
+  get() {
+    this.capacity;
+  }
+  set(_capacity) {
+    this.capacity = _capacity;
+  }
+
   getAvailableSeatCount() {
     return this.capacity - this.passageiros.length;
   }
 
-  get join() {
-    return this.passageiros;
-  }
-  set join(passageiro) {
+  join(passageiro) {
     if (this.getAvailableSeatCount() > 0) {
       this.passageiros.push(passageiro);
     }
